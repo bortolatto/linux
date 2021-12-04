@@ -1,0 +1,21 @@
+#!/bin/bash
+
+NUMERO_REGISTROS=$1
+NOME_ARQUIVO=$2
+NUMERO_INICIAL=$3
+
+while [[ 1 -le $NUMERO_REGISTROS ]]
+do
+  IDENTIFICADOR=$(cat ${NOME_ARQUIVO} | awk -F '"' '{print $4}')
+  CDA=$(cat ${NOME_ARQUIVO} | awk -F '"' '{print $8}')
+
+  NUMERO_INICIAL=$(( NUMERO_INICIAL + 1 ))
+  IDENTIFICADOR_FORMATADO=`printf "%015d" $(( 10#${NUMERO_INICIAL} ))`
+
+  cat $NOME_ARQUIVO | sed "0,/${IDENTIFICADOR}/{s/${IDENTIFICADOR}/${IDENTIFICADOR_FORMATADO}/}" | sed "s/${CDA}/${NUMERO_INICIAL}/" >> novo-${NOME_ARQUIVO}
+  NUMERO_REGISTROS=$(( NUMERO_REGISTROS - 1 ))
+done
+
+rm $NOME_ARQUIVO
+echo 'Terminou!'
+exit 0
