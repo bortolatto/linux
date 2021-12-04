@@ -3,8 +3,8 @@
 usage() {
    echo "Modo de usar: " >&2
    echo "    ${0} -q{quantidade} -f{arquivo} -i{semente}" >&2
-   echo "      -q  Quantidade de arquivos a serem gerados no arquivo" >&2
-   echo "      -f  Nome do arquivo json que foi exportado o avro (sem formatacao)" >&2
+   echo "      -q Quantidade de arquivos a serem gerados no arquivo" >&2
+   echo "      -f Nome do arquivo json que foi exportado o avro (sem formatacao)" >&2
    echo "      -i Número da CDA inicial para que o script gere números a partir deste" >&2
    exit 1
 }
@@ -12,11 +12,6 @@ usage() {
 unset NUMERO_REGISTROS
 unset NOME_ARQUIVO
 unset NUMERO_INICIAL
-
-if [[ "${#}" -eq 0 ]]
-then
-  usage
-fi
 
 while getopts q:f:i: OPCAO 
 do
@@ -28,8 +23,13 @@ do
        ;;
   esac
 done
-
+if [ $OPTIND -eq 1 ]; then usage; fi
 shift $(( OPTIND -1 ))
+
+if [[ -z "${NUMERO_REGISTROS}" || -z "${NOME_ARQUIVO}" || -z "${NUMERO_INICIAL}" ]] 
+then
+   usage
+fi	
 
 while [[ 1 -le $NUMERO_REGISTROS ]]
 do
