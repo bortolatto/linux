@@ -9,23 +9,27 @@ usage() {
    exit 1
 }
 
-if [[ -n "${@}" || "${OPTIND}" -eq 1 ]]
+unset NUMERO_REGISTROS
+unset NOME_ARQUIVO
+unset NUMERO_INICIAL
+
+if [[ "${#}" -eq 0 ]]
 then
-   usage
+  usage
 fi
 
-while getopts n:f:ni: OPCAO 
+while getopts q:f:i: OPCAO 
 do
-  case ${OPCAO} in
-    n) NUMERO_REGISTROS=${OPTARG} ;;
-    f) NOME_ARQUIVO=${OPTARG} ;;
-    ni) NUMERO_INICIAL=${OPTARG} ;;
-    ?) usage 
+  case $OPCAO in
+    q) NUMERO_REGISTROS=$OPTARG ;;
+    f) NOME_ARQUIVO=$OPTARG ;;
+    i) NUMERO_INICIAL=$OPTARG ;;
+    *) usage 
        ;;
   esac
 done
 
-echo $OPTIND
+shift $(( OPTIND -1 ))
 
 while [[ 1 -le $NUMERO_REGISTROS ]]
 do
@@ -39,6 +43,6 @@ do
   NUMERO_REGISTROS=$(( NUMERO_REGISTROS - 1 ))
 done
 
-rm $NOME_ARQUIVO
+#rm $NOME_ARQUIVO
 echo 'Terminou!'
 exit 0
