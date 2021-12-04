@@ -2,10 +2,10 @@
 
 usage() {
    echo "Modo de usar: " >&2
-   echo "    ${0} -n{quantidade} -f{arquivo} -ni{semente}" >&2
-   echo "      -n  Quantidade de arquivos a serem gerados no arquivo" >&2
+   echo "    ${0} -q{quantidade} -f{arquivo} -i{semente}" >&2
+   echo "      -q  Quantidade de arquivos a serem gerados no arquivo" >&2
    echo "      -f  Nome do arquivo json que foi exportado o avro (sem formatacao)" >&2
-   echo "      -ni Número da CDA inicial para que o script gere números a partir deste" >&2
+   echo "      -i Número da CDA inicial para que o script gere números a partir deste" >&2
    exit 1
 }
 
