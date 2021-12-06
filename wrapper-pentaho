@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+. ~/.sdkman/bin/sdkman-init.sh
+cd /opt/data-integration
+sdk env
+./spoon.sh
