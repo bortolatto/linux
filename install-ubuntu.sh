@@ -79,5 +79,8 @@ sudo apt install -y kazam
 # htop
 sudo apt install -y htop
 
+# httpie (https://httpie.io/cli)
+sudo apt install -y httpie
+
 # Forçar reinicialização do sistema
 reboot
